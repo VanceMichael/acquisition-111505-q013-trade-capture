@@ -1,0 +1,8 @@
+{
+  "name": "成交回报副本的会话补发与业务身份接收",
+  "probe": "/session/poll",
+  "identityFields": [
+    "sessionDay",
+    "report"
+  ]
+}
