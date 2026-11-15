@@ -1,8 +1,9 @@
 {
-  "name": "成交回报副本的会话补发与业务身份接收",
-  "probe": "/session/poll",
+  "name": "协作版本库转储的复制谱系与修订资料接收",
+  "probe": "/exports",
   "identityFields": [
-    "sessionDay",
-    "report"
+    "repositoryUuid",
+    "revision",
+    "nodePath"
   ]
 }

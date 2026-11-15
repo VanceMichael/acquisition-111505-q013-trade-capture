@@ -1,4 +1,4 @@
-# 成交回报副本的会话补发与业务身份接收
+# 协作版本库转储的复制谱系与修订资料接收
 
 这是面向资料接收人员的 Node.js 服务。当前提供人工收件、原始字节保管、业务身份版本记录和收件查询；本地来源独立提供合作方交互环境。自动来源接入目前不提供，`POST /api/collect` 返回 501，不会把人工导入宣称为自动采集。
 
@@ -10,10 +10,10 @@
 
 ## 容器
 
-`docker build -t trade-capture:local .` 构建环境，`docker run --rm -p 3200:3200 -p 4200:4200 trade-capture:local` 启动。环境准备后，`docker run --rm --network none trade-capture:local sh -c 'npm run build && npm test && npm run demo'` 可离线检查现有功能。正式展示应从干净归档启动真实新增功能并展示当前输出，完整操作限时 90 秒；准备镜像不计入运行时间。
+`docker build -t revision-dump:local .` 构建环境，`docker run --rm -p 3200:3200 -p 4200:4200 revision-dump:local` 启动。环境准备后，`docker run --rm --network none revision-dump:local sh -c 'npm run build && npm test && npm run demo'` 可离线检查现有功能。正式展示应从干净归档启动真实新增功能并展示当前输出，完整操作限时 90 秒；准备镜像不计入运行时间。
 
 ## 接口与目录
 
-`POST /api/manual` 接收 `fixtures/manual.json` 同形的业务对象，`GET /api/records` 查询全部人工收件版本，`GET /health` 检查进程。人工记录身份字段为 sessionDay, report。同一身份与相同原文重复提交复用版本，内容变化保留旧版本；不同来源不能混淆。归档目录有按摘要保存的 blobs 和按业务身份保存的 receipts。
+`POST /api/manual` 接收 `fixtures/manual.json` 同形的业务对象，`GET /api/records` 查询全部人工收件版本，`GET /health` 检查进程。人工记录身份字段为 repositoryUuid, revision, nodePath。同一身份与相同原文重复提交复用版本，内容变化保留旧版本；不同来源不能混淆。归档目录有按摘要保存的 blobs 和按业务身份保存的 receipts。
 
 `src/` 为收件与传输，`provider/` 为独立来源服务，`fixtures/` 保留来源字节与人工记录，`test/` 验证现有行为。协议范围与局部身份约定见 `docs/source-contract.md`，该文档不规定新增接入的架构。
