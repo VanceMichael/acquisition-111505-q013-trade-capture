@@ -14,4 +14,4 @@
 
 ## 产品现状
 
-`POST /__control` 仅改变本地 mode=complete|truncated|bad-checksum 与 generation。人工入口只接收已核对的 repositoryUuid、revision、nodePath；`Archive.accept` 为同来源同身份保留原文版本。自动转储读取、历史状态重建与修订发布尚未提供。来源、人工收件和归档是现有独立模块，不能把来源生成逻辑当作解析器。
+`POST /__control` 仅改变本地 mode=complete|truncated|bad-checksum 与 generation。人工入口只接收已核对的 repositoryUuid、revision、nodePath；`Archive.accept` 为同来源同身份保留原文版本。自动转储读取、历史状态重建与修订查询已由 `POST /api/collect`、`GET /api/dump/status`、`GET /api/dump/revisions`、`GET /api/dump/revisions/{rev}/node` 提供：按上述约定解析转储流，完整修订落档交接，待决修订不对外可见。来源、人工收件和归档是现有独立模块，不能把来源生成逻辑当作解析器。
